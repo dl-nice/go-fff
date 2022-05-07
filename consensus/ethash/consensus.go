@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"log"
 	"math/big"
 	"runtime"
 	"time"
@@ -50,6 +51,7 @@ var (
 	// It offsets the bomb 4M blocks from Constantinople, so in total 9M blocks.
 	// Specification EIP-2384: https://eips.ethereum.org/EIPS/eip-2384
 	calcDifficultyEip2384 = makeDifficultyCalculator(big.NewInt(9000000))
+	calcDifficultyEip23866 = makeDifficultyCalculator(big.NewInt(10700000))
 
 	// calcDifficultyConstantinople is the difficulty adjustment algorithm for Constantinople.
 	// It returns the difficulty that a new block should have when created at time given the
@@ -403,9 +405,12 @@ func makeDifficultyCalculator(bombDelay *big.Int) func(time uint64, parent *type
 
 		// the exponential factor, commonly referred to as "the bomb"
 		// diff = diff + 2^(periodCount - 2)
+
 		if periodCount.Cmp(big1) > 0 {
 			y.Sub(periodCount, big2)
-			y.Exp(big2, y, nil)
+			z:=y.Exp(big2, y, nil)
+
+			log.Println(periodCount,z)
 			x.Add(x, y)
 		}
 		return x

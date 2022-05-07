@@ -120,6 +120,7 @@ func newFilter(backend Backend, addresses []common.Address, topics [][]common.Ha
 	}
 }
 
+
 // Logs searches the blockchain for matching log entries, returning all from the
 // first block that contains matches, updating the start of the filter accordingly.
 func (f *Filter) Logs(ctx context.Context) ([]*types.Log, error) {

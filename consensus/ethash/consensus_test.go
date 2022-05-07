@@ -19,11 +19,13 @@ package ethash
 import (
 	"encoding/binary"
 	"encoding/json"
+	"log"
 	"math/big"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"testing"
+	"time"
 
 	"github.com/fff-chain/go-fff/common"
 	"github.com/fff-chain/go-fff/common/math"
@@ -86,6 +88,28 @@ func TestCalcDifficulty(t *testing.T) {
 			t.Error(name, "failed. Expected", test.CurrentDifficulty, "and calculated", diff)
 		}
 	}
+}
+func TestMakeDataset(t *testing.T) {
+	df,_:=new(big.Int).SetString("13812444150502336",0)
+
+	z:=calcDifficultyEip23866(uint64(time.Now().Unix()),&types.Header{
+		ParentHash:  common.Hash{},
+		UncleHash:   common.Hash{},
+		Coinbase:    common.Address{},
+		Root:        common.Hash{},
+		TxHash:      common.Hash{},
+		ReceiptHash: common.Hash{},
+		Bloom:       types.Bloom{},
+		Difficulty:  df,
+		Number:      big.NewInt(16022565),
+		GasLimit:    0,
+		GasUsed:     0,
+		Time:        1651827829,
+		Extra:       nil,
+		MixDigest:   common.Hash{},
+		Nonce:       types.BlockNonce{},
+	})
+	log.Println(z)
 }
 
 func randSlice(min, max uint32) []byte {

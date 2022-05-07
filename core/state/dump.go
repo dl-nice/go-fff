@@ -47,13 +47,44 @@ type DumpAccount struct {
 	SecureKey hexutil.Bytes          `json:"key,omitempty"`     // If we don't have address, we can output the key
 
 }
+// DumpAccount represents an account in the state.
+type FFFDumpAccount struct {
+	Balance   string                 `json:"balance"`
+	Nonce     uint64                 `json:"nonce"`
+	Root      string                 `json:"root"`
+	CodeHash  string                 `json:"codeHash"`
+	Code      string                 `json:"code,omitempty"`
+	Storage   map[common.Hash]string `json:"storage,omitempty"`
+	Address   *common.FFFAddress        `json:"address,omitempty"` // Address only present in iterative (line-by-line) mode
+	SecureKey hexutil.Bytes          `json:"key,omitempty"`     // If we don't have address, we can output the key
 
+}
+
+func DumpAccountToFFFDumpAccount(d DumpAccount) FFFDumpAccount {
+
+	f:= new(FFFDumpAccount)
+	z:=common.AddressToFFFAddress(*d.Address)
+	f.Address=&z
+	f.Code=d.Code
+	f.Balance=d.Balance
+	f.CodeHash=d.CodeHash
+	f.SecureKey=d.SecureKey
+	f.Root=d.Root
+	f.Storage=d.Storage
+	f.Nonce=d.Nonce
+	return *f
+
+}
 // Dump represents the full dump in a collected format, as one large map.
 type Dump struct {
 	Root     string                         `json:"root"`
 	Accounts map[common.Address]DumpAccount `json:"accounts"`
 }
-
+// Dump represents the full dump in a collected format, as one large map.
+type FFFDump struct {
+	Root     string                         `json:"root"`
+	Accounts map[common.FFFAddress]FFFDumpAccount `json:"accounts"`
+}
 // OnRoot implements DumpCollector interface
 func (d *Dump) OnRoot(root common.Hash) {
 	d.Root = fmt.Sprintf("%x", root)
@@ -63,6 +94,17 @@ func (d *Dump) OnRoot(root common.Hash) {
 func (d *Dump) OnAccount(addr common.Address, account DumpAccount) {
 	d.Accounts[addr] = account
 }
+func DumpToFFFDump(d Dump) FFFDump  {
+	newF:=new(FFFDump)
+	newF.Accounts=make(map[common.FFFAddress]FFFDumpAccount)
+
+	for k:=range d.Accounts {
+		newF.Accounts[common.AddressToFFFAddress(k)]=DumpAccountToFFFDumpAccount(d.Accounts[k])
+	}
+
+	return *newF
+	
+}
 
 // IteratorDump is an implementation for iterating over data.
 type IteratorDump struct {
@@ -70,7 +112,23 @@ type IteratorDump struct {
 	Accounts map[common.Address]DumpAccount `json:"accounts"`
 	Next     []byte                         `json:"next,omitempty"` // nil if no more accounts
 }
+// IteratorDump is an implementation for iterating over data.
+type FFFIteratorDump struct {
+	Root     string                         `json:"root"`
+	Accounts map[common.FFFAddress]FFFDumpAccount `json:"accounts"`
+	Next     []byte                         `json:"next,omitempty"` // nil if no more accounts
+}
+func IteratorDumpToFFFIteratorDump(d IteratorDump) FFFIteratorDump  {
+	newF:=new(FFFIteratorDump)
+	newF.Accounts=make(map[common.FFFAddress]FFFDumpAccount)
 
+	for k:=range d.Accounts {
+		newF.Accounts[common.AddressToFFFAddress(k)]=DumpAccountToFFFDumpAccount(d.Accounts[k])
+	}
+
+	return *newF
+
+}
 // OnRoot implements DumpCollector interface
 func (d *IteratorDump) OnRoot(root common.Hash) {
 	d.Root = fmt.Sprintf("%x", root)
@@ -178,7 +236,6 @@ func (s *StateDB) RawDump(excludeCode, excludeStorage, excludeMissingPreimages b
 	s.DumpToCollector(dump, excludeCode, excludeStorage, excludeMissingPreimages, nil, 0)
 	return *dump
 }
-
 // Dump returns a JSON string representing the entire state as a single json-object
 func (s *StateDB) Dump(excludeCode, excludeStorage, excludeMissingPreimages bool) []byte {
 	dump := s.RawDump(excludeCode, excludeStorage, excludeMissingPreimages)

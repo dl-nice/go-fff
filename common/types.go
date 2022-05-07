@@ -23,7 +23,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/fff-chain/go-fff/global_config/utils"
 	"math/big"
 	"math/rand"
 	"reflect"
@@ -239,8 +238,7 @@ func (a Address) Hex() string {
 
 // String implements fmt.Stringer.
 func (a Address) String() string {
-
-	return utils.FFFAddressEncode(a.Hex())
+	return a.Hex()
 }
 
 func (a *Address) checksumHex() []byte {
@@ -274,8 +272,6 @@ func (a Address) hex() []byte {
 // Format implements fmt.Formatter.
 // Address supports the %v, %s, %v, %x, %X and %d format verbs.
 func (a Address) Format(s fmt.State, c rune) {
-	s.Write([]byte(a.String()))
-	return
 	switch c {
 	case 'v', 's':
 		s.Write(a.checksumHex())
@@ -312,7 +308,6 @@ func (a *Address) SetBytes(b []byte) {
 
 // MarshalText returns the hex representation of a.
 func (a Address) MarshalText() ([]byte, error) {
-	return []byte( a.String()),nil
 	return hexutil.Bytes(a[:]).MarshalText()
 }
 
