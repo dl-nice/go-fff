@@ -70,7 +70,7 @@ type alethGenesisSpec struct {
 		GasLimit   hexutil.Uint64   `json:"gasLimit"`
 	} `json:"genesis"`
 
-	Accounts map[common.UnprefixedAddress]*alethGenesisSpecAccount `json:"accounts"`
+	Accounts map[common.Address]*alethGenesisSpecAccount `json:"accounts"`
 }
 
 // alethGenesisSpecAccount is the prefunded genesis account and/or precompiled
@@ -201,9 +201,9 @@ func newAlethGenesisSpec(network string, genesis *core.Genesis) (*alethGenesisSp
 
 func (spec *alethGenesisSpec) setPrecompile(address byte, data *alethGenesisSpecBuiltin) {
 	if spec.Accounts == nil {
-		spec.Accounts = make(map[common.UnprefixedAddress]*alethGenesisSpecAccount)
+		spec.Accounts = make(map[common.Address]*alethGenesisSpecAccount)
 	}
-	addr := common.UnprefixedAddress(common.BytesToAddress([]byte{address}))
+	addr := common.Address(common.BytesToAddress([]byte{address}))
 	if _, exist := spec.Accounts[addr]; !exist {
 		spec.Accounts[addr] = &alethGenesisSpecAccount{}
 	}
@@ -212,13 +212,13 @@ func (spec *alethGenesisSpec) setPrecompile(address byte, data *alethGenesisSpec
 
 func (spec *alethGenesisSpec) setAccount(address common.Address, account core.GenesisAccount) {
 	if spec.Accounts == nil {
-		spec.Accounts = make(map[common.UnprefixedAddress]*alethGenesisSpecAccount)
+		spec.Accounts = make(map[common.Address]*alethGenesisSpecAccount)
 	}
 
-	a, exist := spec.Accounts[common.UnprefixedAddress(address)]
+	a, exist := spec.Accounts[common.Address(address)]
 	if !exist {
 		a = &alethGenesisSpecAccount{}
-		spec.Accounts[common.UnprefixedAddress(address)] = a
+		spec.Accounts[common.Address(address)] = a
 	}
 	a.Balance = (*math2.HexOrDecimal256)(account.Balance)
 	a.Nonce = account.Nonce
@@ -290,7 +290,7 @@ type parityChainSpec struct {
 	} `json:"genesis"`
 
 	Nodes    []string                                             `json:"nodes"`
-	Accounts map[common.UnprefixedAddress]*parityChainSpecAccount `json:"accounts"`
+	Accounts map[common.Address]*parityChainSpecAccount `json:"accounts"`
 }
 
 // parityChainSpecAccount is the prefunded genesis account and/or precompiled
@@ -433,11 +433,11 @@ func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []strin
 	spec.Genesis.ExtraData = genesis.ExtraData
 	spec.Genesis.GasLimit = (hexutil.Uint64)(genesis.GasLimit)
 
-	spec.Accounts = make(map[common.UnprefixedAddress]*parityChainSpecAccount)
+	spec.Accounts = make(map[common.Address]*parityChainSpecAccount)
 	for address, account := range genesis.Alloc {
 		bal := math2.HexOrDecimal256(*account.Balance)
 
-		spec.Accounts[common.UnprefixedAddress(address)] = &parityChainSpecAccount{
+		spec.Accounts[common.Address(address)] = &parityChainSpecAccount{
 			Balance: bal,
 			Nonce:   math2.HexOrDecimal64(account.Nonce),
 		}
@@ -549,9 +549,9 @@ func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []strin
 
 func (spec *parityChainSpec) setPrecompile(address byte, data *parityChainSpecBuiltin) {
 	if spec.Accounts == nil {
-		spec.Accounts = make(map[common.UnprefixedAddress]*parityChainSpecAccount)
+		spec.Accounts = make(map[common.Address]*parityChainSpecAccount)
 	}
-	a := common.UnprefixedAddress(common.BytesToAddress([]byte{address}))
+	a := common.Address(common.BytesToAddress([]byte{address}))
 	if _, exist := spec.Accounts[a]; !exist {
 		spec.Accounts[a] = &parityChainSpecAccount{}
 	}

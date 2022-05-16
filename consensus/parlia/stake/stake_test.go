@@ -17,16 +17,20 @@ func TestDeploySafeMath(t *testing.T) {
 
 	d, _ := ethclient.Dial("http://127.0.0.1:8545")
 
-	bl,err:=d.TransactionReceipt(context.Background(),common.HexToHash("0x24b9db5436a3e0e2ccde6e3c91dac2e8e7a05834836ed5b4bdaaf990b8ba5536"))
+	cl3, _ := storage.NewBSCValidatorSetCaller(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
 
 
-	log.Println(bl, err)
+	va,_:=cl3.GetValidators(nil)
+
+	log.Println(va)
+
 
 	return
 
+
 	var currSubmit = 0
 
-	cl2, _ := storage.NewBSCValidatorSetTransactor(common.HexToAddress("0x0000000000000000000000000000000000001000"), d)
+	cl2, _ := storage.NewBSCValidatorSetTransactor(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
 	nonce, err := d.PendingNonceAt(context.Background(), common.HexToAddress("0x5Eba2ee915B919b1da7E39906ccE78af9eF26869"))
 	if err != nil {
 		log.Println("节点异常")
@@ -87,8 +91,8 @@ func TestDeployTransferHelper(t *testing.T) {
 func TestNewTransferHelperCaller(t *testing.T) {
 	d, _ := ethclient.Dial("http://127.0.0.1:8545")
 
-	bf, err := d.TransactionReceipt(context.Background(), common.HexToHash("0x673b92c09099ed42284baafb5370cc900fc1c328b234a631deef2eafa5f22036"))
+	bf, err := d.PendingBalanceAt(context.Background(), common.HexToAddress("FFF5tXp4dJJWemxB4RPMmnVAcanbnsz8MH5Vi3Uf1caR8wtiKtW5nUsGmr"))
 
-	log.Println(bf.Status, err)
+	log.Println(bf, err)
 
 }

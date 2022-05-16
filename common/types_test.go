@@ -21,6 +21,8 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"github.com/fff-chain/go-fff/global_config/utils"
+	"log"
 	"math/big"
 	"reflect"
 	"strings"
@@ -28,15 +30,21 @@ import (
 )
 
 func TestBytesConversion(t *testing.T) {
-	bytes := []byte{5}
-	hash := BytesToHash(bytes)
+	newA:=HexToAddress("FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE")
+	bb,_:= newA.MarshalText()
 
-	var exp Hash
-	exp[31] = 5
+	input:=[]byte(`"FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE"`)
+	newS:=string(input)
 
-	if hash != exp {
-		t.Errorf("expected %x got %x", exp, hash)
-	}
+	log.Println(newS[1:len(newS)-1])
+
+	input = []byte( `"`+ utils.FFFAddressDecode(newS[1:len(newS)-1]) +`"`)
+
+	log.Println(string(input))
+
+	e:=newA.UnmarshalJSON([]byte(`"FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE"`))
+
+	log.Println(string(bb),e)
 }
 
 func TestIsHexAddress(t *testing.T) {
