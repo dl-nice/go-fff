@@ -319,53 +319,6 @@ func (s *Ethereum) APIs() []rpc.API {
 	// Append any APIs exposed explicitly by the consensus engine
 	apis = append(apis, s.engine.APIs(s.BlockChain())...)
 
-	apis = append(apis, []rpc.API{
-		{
-			Namespace: "fff",
-			Version:   "1.0",
-			Service:   NewPublicFFFAPI(s),
-			Public:    true,
-		}, {
-			Namespace: "fff",
-			Version:   "1.0",
-			Service:   NewFFFPublicMinerAPI(s),
-			Public:    true,
-		}, {
-			Namespace: "fff",
-			Version:   "1.0",
-			Service:   downloader.NewFFFPublicDownloaderAPI(s.handler.downloader, s.eventMux),
-			Public:    true,
-		}, {
-			Namespace: "fffminer",
-			Version:   "1.0",
-			Service:   NewFFFPrivateMinerAPI(s),
-			Public:    false,
-		}, {
-			Namespace: "eth",
-			Version:   "1.0",
-			Service:   filters.NewPublicFilterAPI(s.APIBackend, false, 5*time.Minute, s.config.RangeLimit),
-			Public:    true,
-		}, {
-			Namespace: "fffadmin",
-			Version:   "1.0",
-			Service:   NewFFFPrivateAdminAPI(s),
-		}, {
-			Namespace: "fffdebug",
-			Version:   "1.0",
-			Service:   NewFFFPublicDebugAPI(s),
-			Public:    true,
-		}, {
-			Namespace: "fffdebug",
-			Version:   "1.0",
-			Service:   NewFFFPrivateDebugAPI(s),
-		}, {
-			Namespace: "net",
-			Version:   "1.0",
-			Service:   s.netRPCService,
-			Public:    true,
-		},
-	}...)
-
 	// Append all the local APIs and return
 	return append(apis, []rpc.API{
 		{

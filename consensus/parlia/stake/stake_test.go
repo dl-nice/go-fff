@@ -7,6 +7,8 @@ import (
 	"github.com/fff-chain/go-fff/consensus/parlia/storage"
 	"github.com/fff-chain/go-fff/crypto"
 	"github.com/fff-chain/go-fff/ethclient"
+	"github.com/fff-chain/go-fff/global_config"
+	"github.com/fff-chain/go-fff/global_config/wallet"
 	"log"
 	"math/big"
 	"testing"
@@ -20,24 +22,24 @@ func TestDeploySafeMath(t *testing.T) {
 	cl3, _ := storage.NewBSCValidatorSetCaller(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
 
 
-	va,_:=cl3.GetValidators(nil)
+	va,_:=cl3.GetAllStakeInfo(nil)
 
 	log.Println(va)
 
-
-	return
 
 
 	var currSubmit = 0
 
 	cl2, _ := storage.NewBSCValidatorSetTransactor(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
-	nonce, err := d.PendingNonceAt(context.Background(), common.HexToAddress("0x5Eba2ee915B919b1da7E39906ccE78af9eF26869"))
+	nonce, err := d.PendingNonceAt(context.Background(), common.HexToAddress("FFF3nz4U8Fb3Qkfvt8GsGBH6qyck4pEZxwcouKHWDL5HRXB4Uj3SBrNG7N"))
 	if err != nil {
 		log.Println("节点异常")
 	}
 	for {
-		pri := "6d952b8d68a0eeba71fa309d45aadacc4e7a3104f9d1df91b56be468790bbf39"
+		pri := "20a442166fda1598b32d85d0cf5b30fe5867bf23c943f8584013eab0ad49a88c"
 		priKeyECD, err := crypto.HexToECDSA(pri)
+
+		log.Println(wallet.GetPublicAddressFromKey(pri))
 
 		if err != nil {
 			log.Println("私钥异常")
@@ -54,13 +56,16 @@ func TestDeploySafeMath(t *testing.T) {
 			log.Println("节点Transactor异常", err)
 
 		}
+
+		param.Value=global_config.EthToWei(1)
+
 		param.GasPrice,_= d.SuggestGasPrice(context.Background())
 
 		param.Nonce = big.NewInt(int64(nonce))
 
 		log.Println(param)
 
-		trans, err := cl2.CreateAddress(param,big.NewInt(1))
+		trans, err := cl2.StakeFFF(param)
 
 		if err != nil {
 			log.Println(err)
@@ -91,7 +96,7 @@ func TestDeployTransferHelper(t *testing.T) {
 func TestNewTransferHelperCaller(t *testing.T) {
 	d, _ := ethclient.Dial("http://127.0.0.1:8545")
 
-	bf, err := d.PendingBalanceAt(context.Background(), common.HexToAddress("FFF5tXp4dJJWemxB4RPMmnVAcanbnsz8MH5Vi3Uf1caR8wtiKtW5nUsGmr"))
+	bf, err := d.PendingBalanceAt(context.Background(), common.HexToAddress("FFF3nz4U8Fb3Qkfvt8GsGBH6qyck4pEZxwcouKHWDL5HRXB4Uj3SBrNG7N"))
 
 	log.Println(bf, err)
 
