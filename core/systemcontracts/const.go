@@ -2,16 +2,16 @@ package systemcontracts
 
 const (
 	// genesis contracts
-	ZeroAddress                = "0x0000000000000000000000000000000000000000"
-	StakeContract              = "0x0000000000000000000000000000000000001000"
-	ValidatorContract          = "0x0000000000000000000000000000000000001000"
-	SlashContract              = "0x0000000000000000000000000000000000001001"
-	SystemRewardContract       = "0x0000000000000000000000000000000000001002"
-	LightClientContract        = "0x0000000000000000000000000000000000001003"
-	TokenHubContract           = "0x0000000000000000000000000000000000001004"
-	RelayerIncentivizeContract = "0x0000000000000000000000000000000000001005"
-	RelayerHubContract         = "0x0000000000000000000000000000000000001006"
-	GovHubContract             = "0x0000000000000000000000000000000000001007"
-	TokenManagerContract       = "0x0000000000000000000000000000000000001008"
-	CrossChainContract         = "0x0000000000000000000000000000000000002000"
+	ZeroAddress                = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWghsLB"
+	StakeContract              = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"
+	ValidatorContract          = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"
+	SlashContract              = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcY"
+	SystemRewardContract       = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcZ"
+	LightClientContract        = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrca"
+	TokenHubContract           = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcb"
+	RelayerIncentivizeContract = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcc"
+	RelayerHubContract         = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcd"
+	GovHubContract             = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrce"
+	TokenManagerContract       = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcf"
+	CrossChainContract         = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWjfqts"
 )

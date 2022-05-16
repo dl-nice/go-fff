@@ -30,12 +30,21 @@ import (
 )
 
 func TestBytesConversion(t *testing.T) {
-	a:=HexToAddress("0X5aaeb6053f3e94c9b9a09f33669435e7ef1beaed")
-	fffA:=HexToFFFAddress(utils.FFFAddressEncode(a.Hex()))
-	log.Println(fffA)
-	err:=fffA.UnmarshalJSON([]byte(`"FFF3eqTqiJh4tCuwHc4WsHwCwDngroNK3ijxQ1qiX3tf4ymqrDaQzTHed9"`))
-	z,_:=fffA.MarshalText()
-	log.Println(fffA,err,string(z))
+	newA:=HexToAddress("FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE")
+	bb,_:= newA.MarshalText()
+
+	input:=[]byte(`"FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE"`)
+	newS:=string(input)
+
+	log.Println(newS[1:len(newS)-1])
+
+	input = []byte( `"`+ utils.FFFAddressDecode(newS[1:len(newS)-1]) +`"`)
+
+	log.Println(string(input))
+
+	e:=newA.UnmarshalJSON([]byte(`"FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE"`))
+
+	log.Println(string(bb),e)
 }
 
 func TestIsHexAddress(t *testing.T) {

@@ -93,7 +93,7 @@ type cipherparamsJSON struct {
 
 func (k *Key) MarshalJSON() (j []byte, err error) {
 	jStruct := plainKeyJSON{
-		hex.EncodeToString(k.Address[:]),
+		k.Address.Hex(),
 		hex.EncodeToString(crypto.FromECDSA(k.PrivateKey)),
 		k.Id.String(),
 		version,
@@ -115,16 +115,14 @@ func (k *Key) UnmarshalJSON(j []byte) (err error) {
 		return err
 	}
 	k.Id = *u
-	addr, err := hex.DecodeString(keyJSON.Address)
-	if err != nil {
-		return err
-	}
+	addr:= common.HexToAddress(keyJSON.Address)
+
 	privkey, err := crypto.HexToECDSA(keyJSON.PrivateKey)
 	if err != nil {
 		return err
 	}
 
-	k.Address = common.BytesToAddress(addr)
+	k.Address = addr
 	k.PrivateKey = privkey
 
 	return nil
@@ -222,7 +220,7 @@ func writeKeyFile(file string, content []byte) error {
 // UTC--<created_at UTC ISO8601>-<address hex>
 func keyFileName(keyAddr common.Address) string {
 	ts := time.Now().UTC()
-	return fmt.Sprintf("UTC--%s--%s", toISO8601(ts), hex.EncodeToString(keyAddr[:]))
+	return fmt.Sprintf("UTC--%s--%s", toISO8601(ts), keyAddr.Hex())
 }
 
 func toISO8601(t time.Time) string {

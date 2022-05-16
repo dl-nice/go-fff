@@ -17,9 +17,9 @@ var _ = (*vmExecMarshaling)(nil)
 // MarshalJSON marshals as JSON.
 func (v vmExec) MarshalJSON() ([]byte, error) {
 	type vmExec struct {
-		Address  common.UnprefixedAddress `json:"address"  gencodec:"required"`
-		Caller   common.UnprefixedAddress `json:"caller"   gencodec:"required"`
-		Origin   common.UnprefixedAddress `json:"origin"   gencodec:"required"`
+		Address  common.Address `json:"address"  gencodec:"required"`
+		Caller   common.Address `json:"caller"   gencodec:"required"`
+		Origin   common.Address `json:"origin"   gencodec:"required"`
 		Code     hexutil.Bytes            `json:"code"     gencodec:"required"`
 		Data     hexutil.Bytes            `json:"data"     gencodec:"required"`
 		Value    *math.HexOrDecimal256    `json:"value"    gencodec:"required"`
@@ -27,9 +27,9 @@ func (v vmExec) MarshalJSON() ([]byte, error) {
 		GasPrice *math.HexOrDecimal256    `json:"gasPrice" gencodec:"required"`
 	}
 	var enc vmExec
-	enc.Address = common.UnprefixedAddress(v.Address)
-	enc.Caller = common.UnprefixedAddress(v.Caller)
-	enc.Origin = common.UnprefixedAddress(v.Origin)
+	enc.Address = common.Address(v.Address)
+	enc.Caller = common.Address(v.Caller)
+	enc.Origin = common.Address(v.Origin)
 	enc.Code = v.Code
 	enc.Data = v.Data
 	enc.Value = (*math.HexOrDecimal256)(v.Value)
@@ -41,9 +41,9 @@ func (v vmExec) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON unmarshals from JSON.
 func (v *vmExec) UnmarshalJSON(input []byte) error {
 	type vmExec struct {
-		Address  *common.UnprefixedAddress `json:"address"  gencodec:"required"`
-		Caller   *common.UnprefixedAddress `json:"caller"   gencodec:"required"`
-		Origin   *common.UnprefixedAddress `json:"origin"   gencodec:"required"`
+		Address  *common.Address `json:"address"  gencodec:"required"`
+		Caller   *common.Address `json:"caller"   gencodec:"required"`
+		Origin   *common.Address `json:"origin"   gencodec:"required"`
 		Code     *hexutil.Bytes            `json:"code"     gencodec:"required"`
 		Data     *hexutil.Bytes            `json:"data"     gencodec:"required"`
 		Value    *math.HexOrDecimal256     `json:"value"    gencodec:"required"`
