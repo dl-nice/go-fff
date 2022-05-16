@@ -22,7 +22,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"math/big"
 
 	"github.com/fff-chain/go-fff"
@@ -109,7 +108,6 @@ func (ec *Client) getBlock(ctx context.Context, method string, args ...interface
 	} else if len(raw) == 0 {
 		return nil, ethereum.NotFound
 	}
-	log.Println(string(raw))
 	// Decode header and transactions.
 	var head *types.Header
 	var body rpcBlock
@@ -225,7 +223,6 @@ func (ec *Client) TransactionByHash(ctx context.Context, hash common.Hash) (tx *
 	var json2 *rpcTransaction
 	var raw json.RawMessage
 	err = ec.c.CallContext(ctx, &raw, "eth_getTransactionByHash", hash)
-	log.Println(string(raw))
 	if err != nil {
 		return nil, false, err
 	} else if json2 == nil {
@@ -333,8 +330,6 @@ func (ec *Client) TransactionReceipt(ctx context.Context, txHash common.Hash) (*
 	var r *types.Receipt
 	var raw json.RawMessage
 	err := ec.c.CallContext(ctx, &raw, "eth_getTransactionReceipt", txHash)
-
-	log.Println(string(raw))
 	if err == nil {
 		if r == nil {
 			return nil, ethereum.NotFound
