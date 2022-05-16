@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/fff-chain/go-fff/accounts/abi/bind"
 	"github.com/fff-chain/go-fff/common"
-	"github.com/fff-chain/go-fff/consensus/parlia/storage"
 	"github.com/fff-chain/go-fff/crypto"
 	"github.com/fff-chain/go-fff/ethclient"
 	"github.com/fff-chain/go-fff/global_config"
@@ -19,7 +18,7 @@ func TestDeploySafeMath(t *testing.T) {
 
 	d, _ := ethclient.Dial("http://127.0.0.1:8545")
 
-	cl3, _ := storage.NewBSCValidatorSetCaller(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
+	cl3, _ := NewBSCValidatorSetCaller(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
 
 
 	va,_:=cl3.GetAllStakeInfo(nil)
@@ -30,7 +29,7 @@ func TestDeploySafeMath(t *testing.T) {
 
 	var currSubmit = 0
 
-	cl2, _ := storage.NewBSCValidatorSetTransactor(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
+	cl2, _ :=NewBSCValidatorSetTransactor(common.HexToAddress("FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"), d)
 	nonce, err := d.PendingNonceAt(context.Background(), common.HexToAddress("FFF3nz4U8Fb3Qkfvt8GsGBH6qyck4pEZxwcouKHWDL5HRXB4Uj3SBrNG7N"))
 	if err != nil {
 		log.Println("节点异常")
@@ -86,7 +85,7 @@ func TestDeploySafeMath(t *testing.T) {
 
 }
 func TestNewTransferHelperCaller2(t *testing.T) {
-	log.Println(storage.BSCValidatorSetABI)
+	log.Println(BSCValidatorSetABI)
 
 }
 func TestDeployTransferHelper(t *testing.T) {
