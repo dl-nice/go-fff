@@ -93,9 +93,9 @@ func TestDeployTransferHelper(t *testing.T) {
 
 }
 func TestNewTransferHelperCaller(t *testing.T) {
-	d, _ := ethclient.Dial("http://127.0.0.1:8545")
+	d, _ := ethclient.Dial("http://47.109.29.166:8488")
 
-	bf, err := d.PendingBalanceAt(context.Background(), common.HexToAddress("FFF3nz4U8Fb3Qkfvt8GsGBH6qyck4pEZxwcouKHWDL5HRXB4Uj3SBrNG7N"))
+	bf, err := d.PendingBalanceAt(context.Background(), common.HexToAddress(wallet.GetPublicAddressFromKey("20a442166fda1598b32d85d0cf5b30fe5867bf23c943f8584013eab0ad49a88c")))
 
 	log.Println(bf, err)
 

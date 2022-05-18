@@ -70,6 +70,8 @@ var customGenesisTests = []struct {
 		result: "0x0000000000001339",
 	},
 }
+var test121 =`nohup ./geth --datadir ./data/  --http --http.addr 0.0.0.0 --http.port 8488 --http.api admin,debug,web3,eth,txpool,personal,ethash,miner,net  --http.corsdomain "*"  --ws --ws.addr 0.0.0.0 --ws.port 8588 --ws.api admin,debug,web3,eth,txpool,personal,ethash,miner,net --ws.origins  "*" --http --allow-insecure-unlock  &`
+
 var test111 =`nohup ./geth  --http --http.addr 0.0.0.0 --http.port 8488 --http.api admin,debug,web3,eth,txpool,personal,ethash,miner,net  --http.corsdomain "*"  --ws --ws.addr 0.0.0.0 --ws.port 8588 --ws.api admin,debug,web3,eth,txpool,personal,ethash,miner,net --ws.origins  "*" --unlock FFF3nz4U8Fb3Qkfvt8GsGBH6qyck4pEZxwcouKHWDL5HRXB4Uj3SBrNG7N --password 111.txt --mine --http --allow-insecure-unlock  &`
 // Tests that initializing Geth with a custom genesis block and chain definitions
 // work properly.

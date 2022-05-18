@@ -3952,6 +3952,8 @@ var outputPostFormatter = function(post){
 };
 
 var inputAddressFormatter = function (address) {
+
+    return address;
     var iban = new Iban(address);
     if (iban.isValid() && iban.isDirect()) {
         return '0x' + iban.address();
