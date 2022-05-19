@@ -86,6 +86,11 @@ func TestFFFNFTCaller_GetApproved(t *testing.T) {
 	d, _ := ethclient.Dial("http://47.109.29.166:8488")
 
 
+	rc,_:=d.TransactionReceipt(context.Background(),common.HexToHash("0xd6b22795b1b95d9378151e15b53e52ba42999780fb05ceb77c7da7d37f045410"))
+
+	log.Println(rc)
+
+
 
 	contractAddress:=common.HexToAddress("FFF3qqNSEDT6rLQtTfRAskMhbTLRGk5LCseHnvspnFFEiJs1JVaLaivENP")
 
