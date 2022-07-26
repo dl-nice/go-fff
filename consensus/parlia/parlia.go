@@ -73,8 +73,7 @@ var (
 	maxSystemBalance = new(big.Int).Mul(big.NewInt(100), big.NewInt(params.Ether))
 
 	systemContracts = map[common.Address]bool{
-		common.HexToAddress(systemcontracts.StakeContract):              true,
-		common.HexToAddress(systemcontracts.ValidatorContract):          true,
+		common.HexToAddress(systemcontracts.ValidatorContract):              true,
 		common.HexToAddress(systemcontracts.SlashContract):              true,
 		common.HexToAddress(systemcontracts.SystemRewardContract):       true,
 		common.HexToAddress(systemcontracts.LightClientContract):        true,
@@ -102,6 +101,7 @@ var (
 	// errMissingSignature is returned if a block's extra-data section doesn't seem
 	// to contain a 65 byte secp256k1 signature.
 	errMissingSignature = errors.New("extra-data 65 byte signature suffix missing")
+
 
 	// errExtraValidators is returned if non-sprint-end block contain validator data in
 	// their extra-data fields.
@@ -1075,7 +1075,7 @@ func (p *Parlia) distributeIncoming(val common.Address, state *state.StateDB, he
 	}
 
 	// get system message
-	msg := p.getSystemMessage(common.HexToAddress(systemcontracts.ZeroAddress), common.HexToAddress(systemcontracts.StakeContract), data, amount)
+	msg := p.getSystemMessage(common.HexToAddress(systemcontracts.ZeroAddress), common.HexToAddress(systemcontracts.ValidatorContract), data, amount)
 	// apply message
 
 	buff, err := callMessage(msg, state, header, p.chainConfig, chain)
@@ -1118,7 +1118,7 @@ func (p *Parlia) getCurrStakeFFF(val common.Address, state *state.StateDB, heade
 		return nil
 	}
 	// get system message
-	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.StakeContract), data, amount)
+	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.ValidatorContract), data, amount)
 	// apply message
 	buff, err := callMessage(msg, state, header, p.chainConfig, chain)
 	return new(big.Int).SetBytes(buff)
@@ -1136,7 +1136,7 @@ func (p *Parlia) getStakeInfoIndexMap(index int64, state *state.StateDB, header 
 		return common.BytesToAddress([]byte{0}), err
 	}
 	// get system message
-	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.StakeContract), data, big.NewInt(0))
+	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.ValidatorContract), data, big.NewInt(0))
 	// apply message
 	buff, err := callMessage(msg, state, header, p.chainConfig, chain)
 
@@ -1156,7 +1156,7 @@ func (p *Parlia) getStakeInfoMap(index int64, state *state.StateDB, header *type
 		return common.BytesToAddress([]byte{0}), err
 	}
 	// get system message
-	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.StakeContract), data, big.NewInt(0))
+	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.ValidatorContract), data, big.NewInt(0))
 	// apply message
 	buff, err := callMessage(msg, state, header, p.chainConfig, chain)
 
@@ -1191,7 +1191,6 @@ func (p *Parlia) initContract(state *state.StateDB, header *types.Header, chain 
 	method := "init"
 	// contracts
 	contracts := []string{
-		systemcontracts.StakeContract,
 		systemcontracts.ValidatorContract,
 		systemcontracts.SlashContract,
 		systemcontracts.LightClientContract,
@@ -1264,7 +1263,7 @@ func (p *Parlia) distributeToStaker(amount *big.Int, state *state.StateDB, heade
 	}
 
 	// get system message
-	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.StakeContract), data, amount)
+	msg := p.getSystemMessage(header.Coinbase, common.HexToAddress(systemcontracts.ValidatorContract), data, amount)
 	// apply message
 
 	log.Info("系统消息", "1", hexutils.BytesToHex(data), "2", msg)

@@ -101,6 +101,10 @@ var (
 			Description: "Ethereum CLI client.",
 		},
 		{
+			BinaryName:  "fffnode",
+			Description: "fffnode CLI client.",
+		},
+		{
 			BinaryName:  "puppeth",
 			Description: "Ethereum private network manager.",
 		},
@@ -175,6 +179,7 @@ func main() {
 	}
 	switch os.Args[1] {
 	case "install":
+		log.Println(os.Args[2:])
 		doInstall(os.Args[2:])
 	case "test":
 		doTest(os.Args[2:])
@@ -236,6 +241,7 @@ func doInstall(cmdline []string) {
 	// Now we choose what we're even building.
 	// Default: collect all 'main' packages in cmd/ and build those.
 	packages := flag.Args()
+	log.Println(packages)
 	if len(packages) == 0 {
 		packages = build.FindMainPackages("./cmd")
 	}

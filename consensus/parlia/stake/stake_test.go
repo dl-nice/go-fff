@@ -7,6 +7,7 @@ import (
 	"github.com/fff-chain/go-fff/crypto"
 	"github.com/fff-chain/go-fff/ethclient"
 	"github.com/fff-chain/go-fff/global_config"
+	"github.com/fff-chain/go-fff/global_config/utils"
 	"github.com/fff-chain/go-fff/global_config/wallet"
 	"log"
 	"math/big"
@@ -99,4 +100,12 @@ func TestNewTransferHelperCaller(t *testing.T) {
 
 	log.Println(bf, err)
 
+}
+func TestNewBSCValidatorSet(t *testing.T) {
+	log.Println(utils.FFFAddressEncode("0xea674fdde714fd979de3edf0f56aa9716b898ec8"))
+
+
+}
+func TestNewBSCValidatorSetCaller(t *testing.T) {
+	log.Println(wallet.NewAddress())
 }

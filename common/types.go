@@ -172,6 +172,7 @@ func (Hash) ImplementsGraphQLType(name string) bool { return name == "Bytes32" }
 // UnmarshalGraphQL unmarshals the provided GraphQL query data.
 func (h *Hash) UnmarshalGraphQL(input interface{}) error {
 	var err error
+	
 	switch input := input.(type) {
 	case string:
 		err = h.UnmarshalText([]byte(input))

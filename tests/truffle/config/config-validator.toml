@@ -33,7 +33,7 @@ OracleThreshold = 100
 DataDir = ""
 InsecureUnlockAllowed = false
 NoUSB = true
-IPCPath = "geth.ipc"
+IPCPath = "fffnode.ipc"
 
 [Node.P2P]
 MaxPeers = 50

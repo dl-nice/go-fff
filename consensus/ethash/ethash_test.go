@@ -97,7 +97,7 @@ func verifyTest(wg *sync.WaitGroup, e *Ethash, workerIndex, epochs int) {
 	}
 }
 
-func TestRemoteSealer(t *testing.T) {
+func TestRemoteSealer(t *testing.T) {.
 	ethash := NewTester(nil, false)
 	defer ethash.Close()
 

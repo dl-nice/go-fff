@@ -472,3 +472,10 @@ func tmpKeyStore(t *testing.T, encrypted bool) (string, *KeyStore) {
 	}
 	return d, newKs(d)
 }
+
+func TestEncryptDataV3(t *testing.T) {
+
+	ks:= NewKeyStore("F:/", veryLightScryptN, veryLightScryptP)
+	k,_:=crypto.HexToECDSA("")
+	ks.ImportECDSA(k,"")
+}

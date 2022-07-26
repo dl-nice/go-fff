@@ -8,14 +8,13 @@ import (
 	"github.com/fff-chain/go-fff/ethclient"
 	"github.com/fff-chain/go-fff/global_config/wallet"
 	"log"
-	"math/big"
 	"testing"
 )
 
 func TestDeployAddress(t *testing.T) {
 
 
-	d, _ := ethclient.Dial("http://47.109.29.166:8488")
+	d, _ := ethclient.Dial("http://87.118.86.2:8488")
 
 	pri := "20a442166fda1598b32d85d0cf5b30fe5867bf23c943f8584013eab0ad49a88c"
 
@@ -51,7 +50,7 @@ func TestDeployAddress(t *testing.T) {
 }
 
 func TestFFFNFTTransactor_Mint(t *testing.T) {
-	d, _ := ethclient.Dial("http://47.109.29.166:8488")
+	d, _ := ethclient.Dial("http://87.118.86.2:8488")
 
 	pri := "20a442166fda1598b32d85d0cf5b30fe5867bf23c943f8584013eab0ad49a88c"
 
@@ -60,7 +59,7 @@ func TestFFFNFTTransactor_Mint(t *testing.T) {
 
 	ownerAddress:=wallet.GetPublicAddressFromKey(pri)
 
-	contractAddress:=common.HexToAddress("FFF3qqNSEDT6rLQtTfRAskMhbTLRGk5LCseHnvspnFFEiJs1JVaLaivENP")
+	contractAddress:=common.HexToAddress("FFF3kbeRvCXCQT4eJ4VZ6mRZDu9RzWaNCXK8csoCGiCBNNf8iu1QMpMnt1")
 
 	cl,_:=NewFFFNFTTransactor(contractAddress,d)
 	chianId, err := d.ChainID(context.Background())
@@ -83,21 +82,17 @@ func TestFFFNFTTransactor_Mint(t *testing.T) {
 
 func TestFFFNFTCaller_GetApproved(t *testing.T) {
 
-	d, _ := ethclient.Dial("http://47.109.29.166:8488")
+	d, _ := ethclient.Dial("http://87.118.86.2:8488")
 
+	rc,_:=d.TransactionReceipt(context.Background(),common.HexToHash("0xa6438cfe68f349743b9d7ed85df14510bea7938f36a7b1b467a124d1a6efbbbf"))
+	log.Println(rc.BlockNumber)
 
-	rc,_:=d.TransactionReceipt(context.Background(),common.HexToHash("0xd6b22795b1b95d9378151e15b53e52ba42999780fb05ceb77c7da7d37f045410"))
+}
+func TestDeployEnumerableMap(t *testing.T) {
+	pri := "218ec8f94b29a96d38a21b19e0b866faf9963f48a1a0d575d91990fdf08f8936"
 
-	log.Println(rc)
+	ownerAddress:=wallet.GetPublicAddressFromKey(pri)
 
-
-
-	contractAddress:=common.HexToAddress("FFF3qqNSEDT6rLQtTfRAskMhbTLRGk5LCseHnvspnFFEiJs1JVaLaivENP")
-
-	cl,_:=NewFFFNFTCaller(contractAddress,d)
-
-	lf,_:=cl.TokenInfo(nil,big.NewInt(1))
-
-	log.Println(lf)
+	log.Println(ownerAddress)
 
 }

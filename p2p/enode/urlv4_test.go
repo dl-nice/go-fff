@@ -19,6 +19,7 @@ package enode
 import (
 	"crypto/ecdsa"
 	"errors"
+	"log"
 	"net"
 	"reflect"
 	"strings"
@@ -189,5 +190,7 @@ func TestParseNode(t *testing.T) {
 }
 
 func TestNodeString(t *testing.T) {
-
+	ks,_:=crypto.HexToECDSA("ca567746f19b24979246233a3d977c15ed3ecc46201f658322807e9ba03fe45e")
+	v:=NewV4(&ks.PublicKey,net.ParseIP("127.0.0.1"),33033,33033)
+	log.Println(v.String())
 }

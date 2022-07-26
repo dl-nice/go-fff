@@ -138,7 +138,7 @@ func remoteConsole(ctx *cli.Context) error {
 				path = filepath.Join(path, "yolo-v3")
 			}
 		}
-		endpoint = fmt.Sprintf("%s/geth.ipc", path)
+		endpoint = fmt.Sprintf("%s/fffnode.ipc", path)
 	}
 	client, err := dialRPC(endpoint)
 	if err != nil {

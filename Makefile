@@ -12,6 +12,11 @@ GOBIN = ./build/bin
 GO ?= latest
 GORUN = env GO111MODULE=on go run
 
+fffnode:
+	go build -o ./build/bin/fffnode -trimpath  ./cmd/geth/
+	@echo "Done building."
+	@echo "Run \"$(GOBIN)/fffnode\" to launch fffnode."
+
 geth:
 	$(GORUN) build/ci.go install ./cmd/geth
 	@echo "Done building."

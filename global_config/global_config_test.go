@@ -8,3 +8,5 @@ import (
 func TestInitConfig(t *testing.T) {
 	log.Println(GenesisJson)
 }
+
+

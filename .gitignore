@@ -9,6 +9,8 @@
 */**/*.test
 *un~
 .DS_Store
+0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
 */**/.DS_Store
 .ethtest
 */**/*tx_database*
@@ -27,6 +29,7 @@ build/_vendor/pkg
 /build/_workspace/
 /build/cache/
 /build/bin/
+/build/bin/*
 /nodedata
 /cmd/geth/nodedata/
 /cmd/geth/nodedata/*
@@ -54,3 +57,4 @@ profile.cov
 **/yarn-error.log
 cmd/geth/node/
 cmd/geth/__debug_bin
+global_config/keys/*
