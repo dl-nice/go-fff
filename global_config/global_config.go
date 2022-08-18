@@ -57,7 +57,7 @@ var GenesisJson = `
   "gasLimit": "0x2625a00",
   "difficulty": "0x1",
   "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "coinbase": "FFF65Z2sYf3rx6E6tVf3LN9qQ4isBCEawGFBouGonW6rhcjPanvVeH5YMG",
+  "coinbase": "FFF3bU8HSUk8iFihi9mgFdJhByP8KoFWWH7pmAJ5Ty6T4CRrVSdAsfyQnj",
   "alloc": {
     "FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE": {
       "balance": "0x0"
