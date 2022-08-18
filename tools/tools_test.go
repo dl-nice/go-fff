@@ -10,7 +10,7 @@ import (
 )
 
 func TestEnodeSync(t *testing.T) {
-	key, _ := crypto.HexToECDSA("c11f1be8baea65bd18bb81f2c7213deabbef6360f9eb24c470a36577e38b8062")
+	key, _ := crypto.HexToECDSA("ffa3ae7c376602fd606409755b6b9aa2f6318995de90b17192fbe5c7db0b6741")
 	address := crypto.PubkeyToAddress(key.PublicKey)
 	fmt.Println(address)
 	s := enode.NewV4(&key.PublicKey, net.IP{127, 0, 0, 1}, 30300, 0)
