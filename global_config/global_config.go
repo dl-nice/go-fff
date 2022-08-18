@@ -5,13 +5,14 @@ import (
 	"math/big"
 	"strings"
 )
-var MintAddress = "FFF3nz4U8Fb3Qkfvt8GsGBH6qyck4pEZxwcouKHWDL5HRXB4Uj3SBrNG7N" //增发和预挖主地址
+
+var MintAddress = "FFF3Z5psk4mM3ReMcfzvQYQu6RJdRDD8TKzP5iUE4b1sqeasaPicztxKcM" //增发和预挖主地址
 
 var MintBlockNum = big.NewInt(10000000) //多少个块增发一次
 
-var MintBlockReward = EthToWei(100*math.Pow10(9)) //增发奖励
+var MintBlockReward = EthToWei(100 * math.Pow10(9)) //增发奖励
 
-var InitAllocReward = EthToWei(1000*math.Pow10(9)) //预挖奖励
+var InitAllocReward = EthToWei(1000 * math.Pow10(9)) //预挖奖励
 
 var DefaultHomePath = "./nodedata/"
 var NodeHomePath = "fffdata"
@@ -19,20 +20,14 @@ var IPCPath = "fffnode.ipc"
 var NetworkID = uint64(98888)
 var MainnetNodes = []string{
 	// 自定义链种子节点
-	"enode://b6cb4667ff8040de0166ca0085b5048e5a2ffd331b8a56e8232748b2ead29ab8a3064e808161ad70b0c972a2464276fd471f8749abb51c3acfa39f43b4b34e08@87.118.86.56:30303",
-	"enode://d55db72408b75bd4f57e5d248600df617e717cacc82d456987635d0b5ad61da0891b91b11b95ffaf46b6dff86b0a1ef2e5949b9ca563d10c6d67879e996fdf19@87.118.86.45:30303",
-	"enode://80b883ab95ca9e1a290d6f71816bf526543257b788edaa0f35c446ef68836772dc1f95f29344a3a867f71549a69eb6e9b35374ca5b4de7c5b51b66e57221cf07@87.118.86.34:30303",
-	"enode://27ef5b8cd9b019ded788fda5035c04f1cac1b9c5b917f3b9eb997d748e5fe0f5acbfab50b4653949a727b473f2e10046d70ddacc3b99df012516d2516ecaac0c@87.118.86.21:30303",
-	"enode://53361daa45ae17ce647c7cc3a3947275d30df1e15e4035e9026fe3726eaba2bddaef275c7003d5c48b959ef0f2eb05c3432f7bdfc3d0be1d6eab14fde3a0b761@87.118.86.19:30303",
+	"enode://57352b4e66afd70708804d4194f97b639c29008b3e102b2f8434d1b430cf024572d5e15c285e8a9ccd4cd12b179e49e15156fca62a1de27659bce183100ea5e4@127.0.0.1:30300",
+	"enode://f0f06596d04641d4711dcdd127fce1940fe88df7cbda701d15d12d59e6e720efa4bb0687c7b952b7d8dfb4ed19252e0d7af62b8ed7e121b9dc1f54c2d3677e05@127.0.0.1:30301",
 }
 
 var NodeAddressList = []string{
 	// 自定义链种子节点
-	"FFF3bU8HSUk8iFihi9mgFdJhByP8KoFWWH7pmAJ5Ty6T4CRrVSdAsfyQnj",
-	"FFF3hjGu6TPkWtuwTxSqXJm8h7PBjc8nWPjxSJ2A3bJTuQJyHWqKTLjyDX",
-	"FFF3o2oe8Zyo8yvG2X1HFBVaCgAKQ9EPN1gpTYyo84SJFftTN7aNAzZSHV",
-	"FFF65asrEm3F66bui6mZuHtQQWxT2bWGL6DQYGfdEL31naYF5x5BpEzQwf",
-	"FFF3TKXUy3E1PG3CSpM6KrjVdBnKZa1Lpm2vwMmUwQuQeJrjCFroBu5LLP",
+	"FFF65Z2sYf3rx6E6tVf3LN9qQ4isBCEawGFBouGonW6rhcjPanvVeH5YMG",
+	"FFF5qgWF4yhkSGFtBTQ8RAKDb5aFYGKZkMJfRXaMAsF1CDqZAewZ5JjJtZ",
 }
 
 var GenesisJson = `
@@ -62,7 +57,7 @@ var GenesisJson = `
   "gasLimit": "0x2625a00",
   "difficulty": "0x1",
   "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "coinbase": "FFF3bU8HSUk8iFihi9mgFdJhByP8KoFWWH7pmAJ5Ty6T4CRrVSdAsfyQnj",
+  "coinbase": "FFF65Z2sYf3rx6E6tVf3LN9qQ4isBCEawGFBouGonW6rhcjPanvVeH5YMG",
   "alloc": {
     "FFF6672WbdorrmkMpavk1S5ALpoN82XpSirbMWZicxhhqqNeromt65d6TE": {
       "balance": "0x0"
