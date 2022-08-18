@@ -3,7 +3,7 @@ package systemcontracts
 const (
 	// genesis contracts
 	ZeroAddress                = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWghsLB"
-	ValidatorContract          = "FFF3VfLPY1maC4RogsWnzd3hZpakxdptfN7xBzckzmT88HQT6CMQvduBM2"
+	ValidatorContract          = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcX"
 	SlashContract              = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcY"
 	SystemRewardContract       = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrcZ"
 	LightClientContract        = "FFF3Psbq3enwAmwXGa2QejWFdd9AwV1rczE6w1GPzs6WTPmJpKbmWiBrca"
